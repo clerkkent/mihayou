@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+	<title>首页</title>
+	<link href="css/common.css" type="text/css" rel="stylesheet"/>
+</head>	
+<body ng-app="MyApp01" ng-controller="MainCtrl" style="display: flex;flex-direction:column;background-color: #2F9CC0">
+	<ion-side-menus>
+	  <!-- 中间内容 -->
+	  <ion-side-menu-content style="display: flex;flex-direction:column">
+		  <!-- directive:loading-add -->
+		  <!-- directive:header-add -->
+		  <content class="index_con" ui-view style="display: flex;flex-direction: column;">
+		  	<!-- directive:indexcon-add -->
+	      </content>
+	  </ion-side-menu-content>
+
+	  <!-- 左侧菜单 -->
+	  <ion-side-menu side="left">
+	  		<!-- directive:menu-add -->
+	  </ion-side-menu>
+	</ion-side-menus>
+	
+	<script  src="js/common.js"></script>
+</body>
+</html>

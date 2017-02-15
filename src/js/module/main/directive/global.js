@@ -1,0 +1,42 @@
+;MyApp01.directive("headerAdd",function(){
+	return{
+		restrict:'ECMA',
+		replace:"true",
+		templateUrl:"html/GlobalHtml/head.html",
+		controller:"MainCtrl",
+
+	}
+});
+/*MyApp01.directive("indexconAdd",function(){
+	return{
+		restrict:'ECMA',
+		replace:"true",
+		scope:true,
+		templateUrl:"html/SubHtml/index1.html",
+		controller:"MainCtrl",
+	}
+});*/
+MyApp01.directive("menuAdd",function(){
+	return{
+		restrict:'ECMA',
+		replace:"true",
+		templateUrl:"html/GlobalHtml/menu.html",
+		controller:"MainCtrl"
+	}
+});
+MyApp01.directive("loadingAdd",function(){
+	return{
+		restrict:'ECMA',
+		replace:"true",
+		templateUrl:"html/GlobalHtml/loading.html",
+		controller:"MainCtrl"
+	}
+});
+MyApp01.directive("footerAdd",function(){
+	return{
+		restrict:'ECMA',
+		replace:"true",
+		templateUrl:"html/GlobalHtml/footer.html",
+		controller:"MainCtrl"
+	}
+});

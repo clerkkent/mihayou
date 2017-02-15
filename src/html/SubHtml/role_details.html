@@ -1,0 +1,60 @@
+<div id="roles_details">
+	
+				<div class="screen01" style="background:url({{roledata.pic}}) top center no-repeat;background-size:100%;">
+					<a href="javascript:;" class="left" ng-click="leftgo()"></a>
+					<a href="javascript:;" class="right" ng-click="rightgo()"></a>
+					<div>{{all.name}}</div>
+					<ul class="information">
+						<li class="classpic"><img src={{roledata.classpic}}></li>
+						<li class="intr_video">
+							<video class=""   controls preload="none" poster="{{roledata.intr_video_poster}}">
+								<source ng-src={{trustsrc(roledata.intr_video)}} type="video/mp4">
+							</video>
+						</li>
+						<li class="name details">
+							<b></b>
+							<span>姓名：{{roledata.intr_text[0].name}}</span>
+						</li>
+						<li class="age details">
+							<b></b>
+							<span>年龄：{{roledata.intr_text[0].age}}</span>
+						</li>
+						<li class="weapon details">
+							<b></b>
+							<span>装甲：{{roledata.intr_text[0].weapon}}</span>
+						</li>
+						<li class="fight_style details">
+							<b></b>
+							<span>作战方式：{{roledata.intr_text[0].battle_model}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="skills">
+					<h2>角色招式</h2>
+					<div class="skill-wrap" ng-repeat="item in roledata.skill">
+						<div class="skill-icon-wrap">
+							<img src={{trustsrc(item.skill_icon)}}>
+						</div>
+						<div class="skill-name">
+							{{item.skill_name}}
+						</div>
+						<div class="skill-video">
+							<video class="" controls preload="none" poster={{trustsrc(item.skill_pic)}}>
+							<source ng-src={{trustsrc(item.skill_video)}} type="video/mp4"/>
+							</video>
+						</div>
+					</div>
+				</div>
+				<div class="roles-section">
+					<h2>角色介绍</h2>
+					<h3>{{roledata.nickname}}</h3>
+					<div class="section">
+						{{roledata.details}}
+					</div>
+				</div>
+				<div class="quick_go">
+					<a href="javascript:;" class="left"><img src={{passcard}} ng-click="leftgo()"alt=""></a>
+					<a href="javascript:;" class="right"><img src={{futurecard}} ng-click="rightgo()" alt=""></a>
+				</div>
+	
+</div>	

@@ -1,0 +1,35 @@
+<div id="video" style="flex:1;">
+	<div id="video-frame" class="video_show">
+		<div class="video-close-btn">×</div>
+		<div class="video-playing">
+			<video  class="video_plays" controls preload="auto"   title=""  poster="" width="80%">        
+            </video>
+		</div>
+       
+	</div>
+	<ion-view title="videos" hide-nav-bar="true">
+		<ion-scroll zooming="true" direction="y" class="video-scroll" style="width:100%;height:100%;">
+			<div class="video-common video-big introduce">
+                <div class="video-wrap"></div>
+                <div class="play-btn" video_src="http://ojebvmgul.bkt.clouddn.com/pv.mp4" cover_src="images/index/cover2.jpg"></div>
+                <div class="video-title">游戏视频</div>
+            </div>
+            <div class="video-common video-big cgindroduce">
+                <div class="video-wrap"></div>
+                <div class="play-btn" video_src="http://clerkkent.duapp.com/mihayou/CG_OP_1800.mp4" cover_src="images/index/cover3.jpg"></div>
+                <div class="video-title">开场动画</div>
+            </div>
+            <div class="row row-wrap">
+            	<div class="col col-50" ng-repeat="item in video">
+            		<div class="video-common video-small cgindroduce">
+		                <div class="video-wrap" style="background:url({{item.cover}}) center center no-repeat;background-size: 100%;"></div>
+		                <div class="play-btn" video_src={{item.video}} cover_src={{item.cover}}></div>
+		                <div class="video-title">{{item.title}}</div>
+		            </div>
+            	</div>
+            </div>
+            <div class="transition"></div>
+            <!-- directive:footer-add -->
+		</ion-scroll>
+	</ion-view>
+</div>		

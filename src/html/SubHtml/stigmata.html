@@ -1,0 +1,23 @@
+<div id="roles" class="stigmata">
+	<ion-view title="news" hide-nav-bar="true">
+		<ion-scroll  zooming="true" direction="y" style="width:100%;height:100%;background-color:#2F9CC0;">
+			<div class="roles_scroll" ui-view style="background: url(http://ojebvmgul.bkt.clouddn.com/stigmata/head-bg.jpg) top center no-repeat;background-size:100%;background-color: black;">
+				<div class="section-subtitle-wrap">
+		            <h3 class="section-subtitle">那些在悠久历史中</h3>
+		            <h3 class="section-subtitle">与崩坏抗争着的英魂们</h3>
+		            <h3 class="section-subtitle">有的是身手敏捷的刺客</h3>
+		            <h3 class="section-subtitle">化身成铭刻在少女身体上的圣痕</h3>
+		        </div>
+		        <div class="row row-wrap roles_list">
+		        	<div class="col col-33" ng-repeat="item in roles">
+		        		<img src={{item.card}}  ng-click="roleSelectByclick('{{item.eng}}')">
+		        		<p class="title">{{item.nickname}}</p>
+		        	</div>
+		        </div>
+		    </div>  
+		    
+		    <div class="transition"></div>
+            <!-- directive:footer-add -->  
+		</ion-scroll>
+	</ion-view>
+</div>

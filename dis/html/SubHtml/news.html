@@ -1,0 +1,40 @@
+<div id="news">
+	<ion-view title="news" hide-nav-bar="true">
+		<ion-scroll zooming="true" direction="y" style="width:100%;height:100%; background:#2F9CC0">
+			<div class="tabs-striped tabs-top  tabs-color-calm tabs-background-calm" id="tab_self_news" style="position:relative;">
+				<div class="tabs" style="top:0">
+				      <a class="tab-item" href="javascript:;" title="最新" ng-click="orderByclick('timen')">
+				       		最新
+				      </a>
+				      <a class="tab-item" href="javascript:;" title="新闻" ng-click="selectByclick('新闻')">
+				        	新闻
+				      </a>
+				      <a class="tab-item" href="javascript:;" title="公告" ng-click="selectByclick('公告')">
+				       		公告
+				      </a>
+				      <a class="tab-item" href="javascript:;" title="活动" ng-click="selectByclick('活动')">
+				       		活动
+				      </a>
+				      <a class="tab-item" href="javascript:;" title="攻略" ng-click="selectByclick('攻略')">
+				       		攻略
+				      </a>
+			    </div>
+			</div>
+			<ul id="news_content_news" style="padding-top: 1rem">
+				<li ng-repeat="item in news | orderBy:order:'desc' | filter:select" class="item item-divider">
+					<img src={{item.pic}}>
+					<p class="title_news">{{item.name}}</p>
+					<p class="date_news">发布日期：{{item.time}}</p>
+					<p class="content_news">{{item.name}}</p>
+				</li>
+			</ul>
+			<div  class="more_news">
+				<a href="javascript:void(0);" class="more">
+					<span class="title">更多新闻</span>	<br/>
+					<span class="english">GET MORE INFORMATION</span>
+				</a>
+			</div>
+			<!-- directive:footer-add -->
+		</ion-scroll>
+	</ion-view>	
+</div>	

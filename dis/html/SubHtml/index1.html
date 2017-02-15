@@ -1,0 +1,74 @@
+
+	
+		<ion-scroll zooming="true" direction="y" style="width:100%;height:100%; background:#2F9CC0">
+			<div class="screen_01">
+				<img src="images/index/bh3logo_m.png">
+			</div>
+			<div class="download">
+				<img class="iphone" src="images/index/1.png" alt="">
+				<img class="andr" src="images/index/2.png" alt="">
+				<img class="tap" src="images/index/3.png" alt="">
+			</div>
+			<div class="news">
+				<div class="swiper-container index_banner" style="transform: scale(1.1);">
+					<ul class="swiper-wrapper">
+						<li class="swiper-slide"><img src="images/index/lunbo1.png" alt=""></li>
+						<li class="swiper-slide"><img src="images/index/lunbo2.png" alt=""></li>
+					</ul>
+					<div class="swiper-pagination"></div>
+				</div>
+				<div class="news_content">
+					<div class="tabs-striped tabs-top  tabs-color-calm tabs-background-calm tab_self" style="position:relative;margin-top:0.25rem;">
+						<div class="tabs" style="top:0">
+						      <a class="tab-item" href="javascript:;" title="最新" ng-click="orderByclick('time')">
+						       		最新
+						      </a>
+						      <a class="tab-item" href="javascript:;" title="新闻" ng-click="selectByclick('新闻')">
+						        	新闻
+						      </a>
+						      <a class="tab-item" href="javascript:;" title="公告" ng-click="selectByclick('公告')">
+						       		公告
+						      </a>
+						      <a class="tab-item" href="javascript:;" title="活动" ng-click="selectByclick('活动')">
+						       		活动
+						      </a>
+						      <a class="tab-item" href="javascript:;" title="攻略" ng-click="selectByclick('攻略')">
+						       		攻略
+						      </a>
+						       <a class="tab-item"  ui-sref="news" href="javascript:;" style="background:url(images/index/more_news.png) center center no-repeat" title="更多">
+						      </a>
+					    </div>
+				    </div>
+				    <ion-scroll class="list" zooming="true" direction="y">
+					    <ul   style="display: block;">
+								<li ng-repeat="item in news | orderBy:order:'desc' | filter:select" class="item item-divider">
+									<a href="javascript:;">
+										<div class="index-news-entry-date">{{item.time}}</div>
+										<div class="index-news-entry-title">[{{item.title}}]{{item.name}}</div>
+									</a>
+								</li>
+						</ul>
+					</div>		
+				</ion-scroll>    
+			</div>
+			<div class="index_video">
+				<div class="first">
+                    <h2 class="section-title">游戏视频</h2>
+                    <div class="video-wrap">
+                        <video class="video-stream html5-main-video" preload="none" controls="true" x-webkit-airplay="allow" title=""  style="width:90%;margin:0 5%;" poster="images/index/cover2.jpg">
+                        	<source src="http://clerkkent.duapp.com/mihayou/pv2_1500.mp4" type="video/mp4"/>
+                        </video>
+                    </div>
+                </div>
+                <div class="first">
+                    <h2 class="section-title">CG动画</h2>
+                    <div class="video-wrap">
+                        <video class="video-stream html5-main-video" preload="none" controls="true" x-webkit-airplay="allow" title=""  style="width:90%;margin:0 5%;" poster="images/index/cover3.jpg">
+                        	<source src="http://clerkkent.duapp.com/mihayou/CG_OP_1800.mp4" type="video/mp4"/>
+                        </video>
+                    </div>
+                </div>
+			</div>
+			<!-- directive:footer-add -->
+		</ion-scroll>	
+	

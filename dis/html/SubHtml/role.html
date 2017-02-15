@@ -1,0 +1,23 @@
+<div id="roles">
+	<ion-view title="news" hide-nav-bar="true">
+		<ion-scroll  zooming="true" direction="y" style="width:100%;height:100%;background-color:#2F9CC0;">
+			<div class="roles_scroll" ui-view>
+				<div class="section-subtitle-wrap">
+		            <h3 class="section-subtitle">您将指挥各具特色的少女们进行战斗</h3>
+		            <h3 class="section-subtitle">她们有的是擅长远距离战斗的枪手</h3>
+		            <h3 class="section-subtitle">有的是身手敏捷的刺客</h3>
+		            <h3 class="section-subtitle">也有操纵重型机甲的幼女</h3>
+		        </div>
+		        <div class="row row-wrap roles_list">
+		        	<div class="col col-33" ng-repeat="item in roles">
+		        		<img src={{item.card}}  ng-click="roleSelectByclick('{{item.eng}}')">
+		        		<p class="title">{{item.nickname}}</p>
+		        	</div>
+		        </div>
+		    </div>  
+		    
+		    <div class="transition"></div>
+            <!-- directive:footer-add -->  
+		</ion-scroll>
+	</ion-view>
+</div>		

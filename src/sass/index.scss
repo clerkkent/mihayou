@@ -1,0 +1,889 @@
+7/*common*/
+body,html{width:100%;height:100%;margin:0;padding:0;background:#1B385E;}
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img { margin:0; padding:0; }
+fieldset, img { border:0; }
+img{display: block;}
+address, caption, cite, code, dfn, th, var { font-style:normal; font-weight:normal; }
+ul, ol { list-style:none; } 
+a { color:#666; text-decoration:none; }
+a:visited { color:#666; }
+a:hover, a:active, a:focus { color:#ff8400; text-decoration:underline; }
+/*small-logo.png*/
+@mixin center-block {
+	position:absolute;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	margin:auto;
+}
+@mixin ell() {
+    overflow: hidden;
+	-ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}/*省略号*/
+@mixin dib() {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}/*兼容转为行内块元素*/
+@mixin clearfix {
+    &:after {
+        clear: both;
+        content: '.';
+        display: block;
+        height: 0;
+        line-height: 0;
+        overflow: hidden;
+    }
+    *height: 1%;
+}/*兼容清除浮动*/
+@mixin minHeight($min-height) {
+    min-height: $min-height;
+    height: auto !important;
+    height: $min-height;
+}/*兼容最小行高*/
+@mixin arrow($direction,
+$size,
+$color) {
+    width: 0;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    overflow: hidden;
+    border-width: $size;
+    cursor: pointer;
+    @if $direction == top {
+        border-style: dashed dashed solid dashed;
+        border-color: transparent transparent $color transparent;
+        border-top: none;
+    }
+    @else if $direction == bottom {
+        border-style: solid dashed dashed dashed;
+        border-color: $color transparent transparent transparent;
+        border-bottom: none;
+    }
+    @else if $direction == right {
+        border-style: dashed dashed dashed solid;
+        border-color: transparent transparent transparent $color;
+        border-right: none;
+    }
+    @else if $direction == left {
+        border-style: dashed solid dashed dashed;
+        border-color: transparent $color transparent transparent;
+        border-left: none;
+    }
+}/*兼容纯css箭头*/
+@mixin backgroundset($url,$top,$left,$size) {
+    background:url($url) $top $left no-repeat;
+    background-size:$size;
+}
+@mixin semi-transparent-colors($attribute,$color,$background){
+    $percent: alpha($color) * 100%; //获取颜色透明度值，并转换成百分比
+    $opaque: opacify($color,1); //使颜色不透明
+    $solid-color: mix($opaque,$background,$percent);
+    #{$attribute}: $solid-color; //设置不透明的颜色，为不支持rgba颜色的浏览器服务
+    #{$attribute}: $color;//设置透明颜色，为支持rgba颜色的浏览器服务
+}/*兼容性透明度*/
+
+/*动画*/
+@keyframes circledoes
+{
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+@keyframes circledoesX
+{
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+@keyframes circledoesY
+{
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+@-webkit-keyframes myfirst /* Safari 与 Chrome */
+{
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+@keyframes disappear
+{
+    from{opacity:1;transform:scale(1) translateY(-0%);}
+    to{opacity:0;transform:scale(0) translateY(-100%);}
+}
+@keyframes borderTransform
+{
+	0%{
+		@include semi-transparent-colors(border-right-color,rgba(blue,1),#FFF);
+		@include semi-transparent-colors(border-top-color,rgba(red,1),#FFF);
+		@include semi-transparent-colors(border-bottom-color,rgba(red,1),#FFF);
+		@include semi-transparent-colors(border-left-color,rgba(blue,1),#FFF);
+	}
+	50%{
+		@include semi-transparent-colors(border-right-color,rgba(red,1),#FFF);
+		@include semi-transparent-colors(border-top-color,rgba(blue,1),#FFF);
+		@include semi-transparent-colors(border-bottom-color,rgba(blue,1),#FFF);
+		@include semi-transparent-colors(border-left-color,rgba(red,1),#FFF);
+	}
+	100%{
+		@include semi-transparent-colors(border-right-color,rgba(blue,1),#FFF);
+		@include semi-transparent-colors(border-top-color,rgba(red,1),#FFF);
+		@include semi-transparent-colors(border-bottom-color,rgba(red,1),#FFF);
+		@include semi-transparent-colors(border-left-color,rgba(blue,1),#FFF);
+	}
+}
+/*动画*/
+/*contentbox*/
+.contentbox{
+	flex:1;
+}		 
+/*loading*/
+.loading_self{
+	position:absolute;
+	z-index:100;
+	width:100%;
+	height:100%;
+	transform-origin:center center;
+	@include backgroundset("../images/global/loading_bg.jpg",top,center,100%);
+	background-size:100%;
+	transition:all .8s;
+	img{
+		animation:circledoes 5s linear  infinite;
+		@include center-block;
+	}
+}
+.disappear{
+		animation:disappear 1s linear forwards;
+}
+/*head*/
+header{
+	width:100%;
+	height:0.98rem;
+	background:#1B385E;
+	position:relative;
+	transition:all .7s;
+	z-index:1000;
+	.head_title{
+		float:left;
+		background:url("../images/global/nav-hamburger-icon.png") center center no-repeat;
+		width:1.28rem;
+		height:0.84rem;
+		background-size:70%;
+	};
+	.head_logo{
+		background:url("../images/global/small-logo.png") center center no-repeat;
+		width:1.4rem;
+		height:1.24rem;
+		background-size:80%;
+		@include center-block;
+		top:0.1rem;
+		z-index: 2;
+	};}
+/*menu*/
+.menu_global{
+	width:100%;
+	
+	height:15rem;
+	transition:all .7s;
+	z-index:10000;
+	@include semi-transparent-colors("background-color",rgba(#1B385E,1),white);
+	.menu_logo{
+		@include backgroundset("../images/index/bh3logo_m.png",top,center,100%);
+		background-size:100%;
+		width:100%;
+		left:0;
+		top:0;
+		height:3.5rem;
+		.menu_close{
+			@include backgroundset("../images/index/nav-mobile-menu-btn-close.png",center,center,100%);
+			background-size:100%;
+			width:1.0rem;
+			height:1.0rem;
+		};
+	}
+	.menu_content{
+			display: flex;
+			flex-direction:column;
+			font-size:0.385rem;
+			height:7.56rem;
+			div{
+				flex:1;
+				box-sizing:border-box;
+				border-bottom:0.0002rem solid #00C3FF;
+				display: block;
+				position:relative;
+				@include backgroundset("../images/global/arrow.png",center,right,10%);
+				
+				a{
+					display: inline-block;
+					height:50%;
+					width:80%;
+					@include center-block;
+					color:#FFF;
+				}
+			}
+		};
+}
+/*index_content*/
+.index_con{
+	flex:1;
+	position:relative;
+	width:100%;
+	overflow-x:hidden;
+	overflow-y:scroll;
+	transition:all .7s;
+	display:flex;
+	flex-direction:column;
+	z-index:1000;
+	.screen_01{
+		background:url("../images/index/head-bg.jpg") center 0.0rem no-repeat;
+		background-size:100%;
+		height:10.7rem;
+		position:relative;
+		margin-bottom: 0.2rem;
+		flex:1;
+		img{
+			width:100%;
+			position:absolute;
+			top:40%;
+		}
+	}
+	.download{
+		@include backgroundset("../images/index/download_bg.jpg",center,center,100%);
+		background-size:100%;
+		height:4.06rem;
+		position:relative;
+		box-sizing:border-box;
+		padding-top:0.4rem;
+		img{
+			height:20%;
+			margin:3%;
+			margin-left:5%;
+		}
+	}
+	.news{
+		@include backgroundset("../images/index/mobile_index_bg.jpg",top,center,100%);
+		background-size:100%;
+		background-color:#000;
+		width:100%;
+		height:14.2rem;
+		box-sizing:border-box;
+		padding:0.96rem 0.48rem;
+		margin-top:0.16rem;
+		font-family:"Microsoft Yahei";
+		ul{
+			width:100%;
+			li{
+				width:100%;
+				img{
+					width:100%;
+					display: block;
+				}
+			}
+		}
+		
+		span{
+			width:0.3rem;
+			height:0.3rem;
+			@include semi-transparent-colors("background-color",rgba(white,.7),#000)
+		}
+		.news_content{
+			width:100%;
+			height:6.52rem;
+			position:relative;
+			background:#000;
+			.tab_self .tabs{
+				@include semi-transparent-colors("background-color",rgba(transparent,1),white);
+				.tab-item{
+					color:#FFF;
+					font-size:0.30rem;
+					
+				}
+				.activated{
+					font-size:0.30rem;
+					color:#67BBDC;
+				}
+			}
+			.list{
+				padding-top:1rem;
+				background:none;
+				width:100%;
+				height:90%;
+				overflow-y:auto;
+				.item-divider{
+					padding:0;
+					border:0px;
+					background-color:transparent;
+					.index-news-entry-title{
+						font-size:0.3rem;
+						width:2.9rem;
+						height:0.82rem;
+						line-height: 0.82rem;
+						@include ell();
+						float:left;
+						color:#FFF;
+						margin-left:3%;
+					}
+					.index-news-entry-date{
+						font-size:0.3rem;
+						width:1.68rem;
+						height:0.82rem;
+						line-height: 0.82rem;
+						@include ell();
+						float:right;
+						color:#FFF;
+						margin-right:3%;
+					}
+				}
+			}
+		
+		
+		}
+	}
+	.index_video{
+		width:100%;
+		height:13.54rem;
+		background:url("../images/index/body-back.png") top center no-repeat;
+		background-size:100%;
+		background-color:#000;
+		.section-title{
+			height:2rem;
+			line-height:2rem;
+			width:100%;
+			text-align:center;
+			color:#FFF;
+			font-size:0.8rem;
+		}
+	}
+	.index_footer{
+		@include semi-transparent-colors("background-color",rgba(#000000,1),white);
+		@include semi-transparent-colors("color",rgba(white,1),#000);
+		position:relative;
+		overflow: hidden;
+		
+		box-sizing:border-box;
+		padding:0 0.2rem;
+		color:#626979;
+		img{
+			width:3.02rem;
+			margin:0.5rem auto; 
+		}
+		a{
+			@include semi-transparent-colors("color",rgba(#626979,1),#000);
+		}
+	}
+}
+/*news_content*/
+#news{
+	#tab_self_news{
+		.tabs{
+			@include semi-transparent-colors("background-color",rgba(transparent,1),white);
+			border-bottom:0.04rem solid #FFF;
+			opacity:1;
+			.tab-item{
+				color:#FFF;
+				font-size:0.30rem;	
+			}
+			.activated{
+				font-size:0.30rem;
+				color:#67BBDC;
+			}
+		}
+	}
+	#news_content_news{
+		li{
+			background:black;
+		}
+		p{
+			color:#FFF;
+		}
+		.title_news{
+			font-size: 0.4rem;
+			line-height:0.8rem;
+		}
+		.date_news{
+			font-size: 0.2rem;
+			padding-bottom:1rem;
+		}
+		.content_news{
+
+		}
+		img{
+			width:5.84rem;
+			border:0.04rem solid #FFF;
+		}
+	}
+	.more_news{
+		width:4.0rem;
+		height:1.2rem;
+		background:#FEDF4C;
+		margin:0.3rem auto;
+		.more{
+			text-align:center;
+			display: inline-block;
+			width:100%;
+			height:100%;
+			vertical-align: middle;
+			line-height:0.6rem;
+			.title{
+			color:black;
+			font-size:0.4rem;
+			}
+			.english{
+				color:#666;
+				font-size:0.2rem;
+			}
+		}
+		
+	}
+}
+/*video_content*/
+#video{
+	display:flex;
+	flex-direction:column;
+	#video-frame{
+		position:fixed;
+		height:100%;
+		width:100%;
+		bottom:0;
+		z-index: 100000;
+		@include semi-transparent-colors(background-color,rgba(#03ccbb,0.5),red);
+		transition: all .3s;
+		transform: scale(0);
+		.video-close-btn{
+			display: block;
+		    position: absolute;
+		    width: 1.2rem;
+		    height: 1.2rem;
+		    text-align: center;
+		    line-height: 1.2rem;
+		    font-size: 1.0rem;
+		    text-align: center;
+		    top: 0;
+		    right: 0;
+		    color: white;
+		    cursor: pointer;
+		    
+		}
+	   .video-playing{
+		width:100%;
+		video{
+			width:95%;
+			@include center-block;
+			box-sizing:border-box;
+			@include semi-transparent-colors(border-color,rgba(blue,0.8),red);
+			border-radius:5%;
+			border:0.3rem solid;
+		}
+		}	
+	}
+	.video-scroll{
+		@include backgroundset("http://ojebvmgul.bkt.clouddn.com/video/video/pic/bg.jpg",top,center,100%);
+		background-size:100%;
+		.transition{height:0.2rem;width:100%;background:#2F9CC0;margin-top:0.3rem;}
+		footer{
+			margin-top:0;
+		}
+		.video-common{
+			margin:0.3rem 5%;
+			position:relative;
+			border:0.05rem solid #FFF;
+			border-radius:5%;
+			.video-wrap{
+				width:100%;
+				height:100%;
+				@include center-block;
+			}
+			.play-btn{
+				@include backgroundset("../images/video/video_mask.png",center,center,100%);
+				background-size: auto 60%;
+				width:100%;
+				height:100%;
+				@include center-block;
+				z-index: 10000;
+			}
+			.video-title{
+				position: absolute;
+			    bottom: 0;
+			    left: 0;
+			    height: 0.44rem;
+			    width: 100%;
+			    background: rgba(0,0,0,0.9);
+			    color: white;
+			    text-align: center;
+			    font-size: 0.24rem;
+			    line-height: 0.44rem;
+			}
+		}
+		.video-big{
+			width:90%;
+			height:3rem;
+		}
+		.introduce{
+			margin-top:1rem;
+			.video-wrap{
+				@include backgroundset("../images/index/cover2.jpg",center,center,100%);
+				background-size: 100%;
+			}
+		}
+		.cgindroduce{
+			.video-wrap{
+				@include backgroundset("../images/index/cover3.jpg",center,center,100%);
+				background-size: 100%;
+			}
+		}
+		.video-small{
+			width:2.84rem;
+			height:1.84rem;
+			margin:auto;
+		}
+		
+		
+	}
+}
+/*roles*/
+#roles{
+	.roles_scroll{
+		@include backgroundset("http://ojebvmgul.bkt.clouddn.com/role/head-bg.jpg",top,center,100%);
+		background-size:100%;
+		background-color: #303070;
+		height:100%;
+		width:100%;
+		overflow: hidden;
+		.section-subtitle-wrap{
+			width:90%;
+			height:3.28rem;
+			margin:80% auto 1rem;
+			h3{
+				color:#FFF;
+				font-size:0.35rem;
+				font-family: "微软雅黑";
+				font-weight:500;
+				text-align:center;
+			}
+		}
+		.roles_list{
+			img{
+				width:1.5rem;
+				height:1.5rem;
+				margin:auto;
+			}
+			.title{
+				color:#FFF;
+				font-size:0.25rem;
+				font-family: "微软雅黑";
+				font-weight:500;
+				text-align:center;
+			}
+		}
+	}
+}
+/*roles_details*/
+#roles_details{
+	.screen01{
+		width:100%;
+		@include minHeight(17.5rem);
+		position:relative;
+		overflow: hidden;
+		background-color:black;
+		a{
+			position:absolute;
+			width:1.08rem;
+			height:2.88rem;
+			top:12%;
+		}
+		.left{
+			@include backgroundset("http://ojebvmgul.bkt.clouddn.com/role/common/avatar-arrow-left.png",top,left,100%)
+			background-size:90%;
+			left:0;
+		}
+		.right{
+			@include backgroundset("http://ojebvmgul.bkt.clouddn.com/role/common/avatar-arrow-right.png",top,right,100%)
+			background-size:90%;
+			right:0;
+		}
+		.information{
+			display:block;
+			margin:3% auto 0%;
+			width:90%;
+			.classpic{
+				img{
+					padding-bottom: 9rem;
+					width:100%;
+				}
+			}
+			.intr_video{
+				margin-bottom: 3%;
+				video{
+					width:100%;
+					position: relative;
+					box-sizing:border-box;
+				    border: 0.2rem solid;
+				    @include semi-transparent-colors(border-color,rgba(#03ccbb,0.5),red);
+				    border-radius: 10px;
+				    cursor: pointer;
+				}
+			}
+			.details{
+				    font-size: 0.34rem;
+				    @include clearfix;
+				    b{
+				    	position: relative;
+				    	margin-left:0.2rem;
+					    display: inline-block;
+					    height: 0.6rem;
+					    width: 0.6rem;
+					    padding: 0;
+					    vertical-align: middle;
+					    @include backgroundset("http://ojebvmgul.bkt.clouddn.com/role/common/tianming.png",center,center,100%)
+					     background-size: 70%;
+					    float: left;
+				    }
+				    span{
+				    	color: white;
+					    text-indent: 8px;
+					    display: inline-block;
+					    vertical-align: middle;
+					    font-family: "微软雅黑";
+				    }
+			}
+		}
+	}
+	.skills{
+		width:100%;
+		@include minHeight(28.0rem);
+		@include backgroundset("http://ojebvmgul.bkt.clouddn.com/role/common/section-abilities.jpg",top,center,100%);
+		background-size:100%;
+		background-color:black;
+		overflow: hidden;
+		h2{
+			width:100%;
+			color:#FFF;
+			text-align: center;
+			padding-top:0.8rem;
+			font-size:0.7rem;
+			font-family: "微软雅黑";
+		}
+		.skill-wrap{
+			width:94%;
+			height:6.2rem;
+			margin:4% auto;
+			position:relative;
+			.skill-icon-wrap{
+				height:1.6rem;
+				width:1.6rem;
+				@include backgroundset("http://ojebvmgul.bkt.clouddn.com/role/common/frame.png",center,center,100%);
+				background-size:90%;
+				img{
+					width:100%;
+					height:100%;
+				}
+			}
+			.skill-name{
+				width:4.2rem;
+				height:1.6rem;
+				box-sizing:border-box;
+				padding:0.2rem 0 0 0.1rem;
+				position:absolute;
+				top:0;
+				right:0;
+				color:#2F9CC0;
+				font-size:0.4rem;
+				font-family: "微软雅黑";
+			}
+			.skill-video{
+				width:100%;
+				margin-top:0.3rem;
+				box-sizing:border-box;
+				border: 0.2rem solid;
+			    @include semi-transparent-colors(border-color,rgba(#03ccbb,0.5),red);
+			    border-radius: 10px;
+			    cursor: pointer;
+				video{
+					width:100%;
+				}
+			}
+		}
+	}
+	.roles-section{
+		width:100%;
+		@include minHeight(12.0rem);
+		@include backgroundset("http://ojebvmgul.bkt.clouddn.com/role/common/section-story.jpg",top,center,100%);
+		background-size:100%;
+		background-color:black;
+		overflow: hidden;
+		h2{
+			width:100%;
+			color:#FFF;
+			text-align: center;
+			padding:0.8rem;
+			font-size:0.7rem;
+			font-family: "微软雅黑";
+		}
+		h3{
+			width:90%;
+			margin:0 auto;
+			font: 400 0.4rem Microsoft Yahei,arial,sans-serif;
+		    text-transform: uppercase;
+		    color: #00c3ff;
+		    padding:0.3rem 0rem;
+		}
+		.section{
+			color:#FFF;
+			width:90%;
+			margin:0 auto;
+			font-size:0.27rem;
+			font-family: "仿宋";
+			font-weight:500;
+			padding-bottom:1rem;
+		}
+	}
+	.quick_go{
+		width:100%;
+		@include minHeight(2.24rem);
+		position: relative;
+		background-color:black;
+		a{
+			width:2.4rem;
+			height:2.2rem;
+			display: block;
+			position:absolute;
+			top:0;
+			img{
+				width:1.44rem;
+				@include center-block;
+				border-radius:60%;
+				border:0.1rem solid;
+				box-sizing: box-sizing;
+				animation:borderTransform 10s linear alternate infinite;
+			}
+		}
+		.left{
+			left:0;
+			@include backgroundset("http://ojebvmgul.bkt.clouddn.com/role/common/avatar-arrow-left-small.png",center,left,40%);
+			background-size:100% auto;
+			img{
+				margin-right:0.3rem;
+			}
+			
+		}
+		.right{
+			right:0;
+			@include backgroundset("http://ojebvmgul.bkt.clouddn.com/role/common/avatar-arrow-right-small.png",center,right,100%);
+			background-size:100% auto;
+			img{
+				margin-left:0.3rem;
+			}
+		}
+	}
+}
+/*feature*/
+#feature{
+	overflow:hidden;
+	.screen{
+		width:100%;
+		background-size:100%;
+		position:relative;
+		margin-bottom: 0.2rem;
+	}
+	.screen01{
+		height:14.68rem;
+		@include backgroundset("http://ojebvmgul.bkt.clouddn.com/feature/head-bg.jpg",top,center,100%)
+		video{
+			position:absolute;
+			bottom:5%;
+			box-sizing:border-box;
+			border-radius:5%;
+			border:0.3rem solid;
+			@include semi-transparent-colors(border-color,rgba(#03ccbb,0.7),red);
+		}
+	}
+	.screen02{
+		height:11.9rem;
+		@include backgroundset("http://ojebvmgul.bkt.clouddn.com/feature/section-game.jpg",top,center,100%)
+	}
+	.go{
+		a{
+			width:50%;
+			height:1.1rem;
+			display: block;
+			position:absolute;
+			margin:0 25%;
+			bottom:7%;
+			text-align: center;
+			color:#FFF;
+			@include semi-transparent-colors(background-color,rgba(#25A7E3,0.9),red)
+			transform:skewX(-8deg);
+			border-radius:3%;
+			.bh3-button-title{
+				font-size: 0.5rem;
+				margin-top:0.1rem;
+			}
+			.bh3-button-subtitle{
+				line-height: 0.2rem;
+			}
+			p{
+				transform:skewX(8deg);
+				font-weight: 600;
+			}
+		}
+	}
+	.screen03{
+		height:11.5rem;
+		@include backgroundset("http://ojebvmgul.bkt.clouddn.com/feature/section-valkyria.jpg",top,center,100%);
+		position:relative;
+		
+	}
+	.screen04{
+		height:11.9rem;
+		@include backgroundset("http://ojebvmgul.bkt.clouddn.com/feature/section-stigmata.jpg",top,center,100%);
+		position:relative;
+	}
+	.screen05{
+		height:7.76rem;
+		@include backgroundset("http://ojebvmgul.bkt.clouddn.com/feature/section-beta.jpg",top,center,100%);
+		position:relative;
+	}
+}
+/*stig圣痕系统介绍*/
+.stigmata{
+	.section-subtitle-wrap{
+		margin-top:120%!important;
+	}
+}
+.stig{
+	h2{
+		margin-bottom: 5rem;
+	}
+}
+/*story*/
+#story{
+	.screen{
+		width:100%;
+		height:14.56rem;
+		@include backgroundset("http://ojebvmgul.bkt.clouddn.com/story/section-body-bg.jpg",top,center,100%);
+		background-color:black;
+		overflow: hidden;
+		.content{
+			width:100%;
+			padding-top:80%;
+			a{
+				display: block;
+				width:90%;
+				margin:5% 5%;
+				color:#FFF;
+				border:0.08rem solid;
+				@include semi-transparent-colors(border-color,rgba(#03ccbb,0.5),red);
+				h3{
+					color:#fff;
+				}
+				img{
+					width:100%;
+				}
+			}
+		}
+		
+	}
+}
