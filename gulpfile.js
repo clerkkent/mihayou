@@ -74,4 +74,4 @@ gulp.task('default', ['testSass', /*'elseTask',*/ "concat", 'copy-css', 'copy-js
 //gulp.src(globs[, options]) 执行任务处理的文件  globs：处理的文件路径(字符串或者字符串数组) 
 //gulp.dest(path[, options]) 处理完后文件生成路径
 
-//test git
+//test git nonono
